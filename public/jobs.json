@@ -1,0 +1,30 @@
+[
+    {
+      "id": 1,
+      "title": "Frontend Developer",
+      "company": "TechNova Pvt Ltd",
+      "location": "Pune, India",
+      "type": "Full-Time"
+    },
+    {
+      "id": 2,
+      "title": "Backend Developer",
+      "company": "CodeCraft Solutions",
+      "location": "Remote",
+      "type": "Internship"
+    },
+    {
+      "id": 3,
+      "title": "UI/UX Designer",
+      "company": "PixelWorks Studio",
+      "location": "Mumbai, India",
+      "type": "Part-Time"
+    },
+    {
+      "id": 4,
+      "title": "Data Analyst",
+      "company": "DataWorks",
+      "location": "Bangalore, India",
+      "type": "Full-Time"
+    }
+  ]

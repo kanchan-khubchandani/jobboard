@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>JobBoard - Dashboard</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50">
+
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow px-6 py-4 flex justify-between items-center">
+
+    <a href="index.html"
+      class="text-2xl font-bold text-blue-600">
+      JobBoard
+    </a>
+
+    <a href="index.html"
+      class="text-gray-600 hover:text-blue-600">
+      Home
+    </a>
+
+  </nav>
+
+
+  <!-- Dashboard -->
+  <main class="max-w-6xl mx-auto px-6 py-10">
+
+
+    <!-- Heading -->
+    <div>
+
+      <h2 class="text-3xl font-bold text-gray-800">
+        Dashboard
+      </h2>
+
+      <p class="text-gray-500 mt-2">
+        Welcome back! Here's your application overview.
+      </p>
+
+    </div>
+
+
+    <!-- Statistics -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mt-8">
+
+
+      <!-- Card 1 -->
+      <div class="bg-white p-6 rounded-xl shadow">
+
+        <p class="text-gray-500">
+          Applications
+        </p>
+
+        <h3 class="text-3xl font-bold text-blue-600 mt-2">
+          12
+        </h3>
+
+      </div>
+
+
+      <!-- Card 2 -->
+      <div class="bg-white p-6 rounded-xl shadow">
+
+        <p class="text-gray-500">
+          Interviews
+        </p>
+
+        <h3 class="text-3xl font-bold text-green-600 mt-2">
+          4
+        </h3>
+
+      </div>
+
+
+      <!-- Card 3 -->
+      <div class="bg-white p-6 rounded-xl shadow">
+
+        <p class="text-gray-500">
+          Saved Jobs
+        </p>
+
+        <h3 class="text-3xl font-bold text-purple-600 mt-2">
+          8
+        </h3>
+
+      </div>
+
+
+      <!-- Card 4 -->
+      <div class="bg-white p-6 rounded-xl shadow">
+
+        <p class="text-gray-500">
+          Offers
+        </p>
+
+        <h3 class="text-3xl font-bold text-orange-500 mt-2">
+          2
+        </h3>
+
+      </div>
+
+    </div>
+
+
+    <!-- Recent Applications -->
+    <section class="bg-white rounded-xl shadow mt-10 p-6">
+
+      <h3 class="text-xl font-bold text-gray-800 mb-5">
+        Recent Applications
+      </h3>
+
+
+      <div class="space-y-4">
+
+
+        <!-- Application 1 -->
+        <div class="border rounded-lg p-4 flex flex-col sm:flex-row justify-between gap-3">
+
+          <div>
+
+            <h4 class="font-bold text-gray-800">
+              Frontend Developer
+            </h4>
+
+            <p class="text-sm text-gray-500">
+              TechNova Pvt Ltd · Pune
+            </p>
+
+          </div>
+
+          <span class="text-green-600 font-medium">
+            Interview
+          </span>
+
+        </div>
+
+
+        <!-- Application 2 -->
+        <div class="border rounded-lg p-4 flex flex-col sm:flex-row justify-between gap-3">
+
+          <div>
+
+            <h4 class="font-bold text-gray-800">
+              UI/UX Designer
+            </h4>
+
+            <p class="text-sm text-gray-500">
+              PixelWorks Studio · Mumbai
+            </p>
+
+          </div>
+
+          <span class="text-yellow-600 font-medium">
+            Under Review
+          </span>
+
+        </div>
+
+
+        <!-- Application 3 -->
+        <div class="border rounded-lg p-4 flex flex-col sm:flex-row justify-between gap-3">
+
+          <div>
+
+            <h4 class="font-bold text-gray-800">
+              Backend Developer
+            </h4>
+
+            <p class="text-sm text-gray-500">
+              CodeCraft Solutions · Remote
+            </p>
+
+          </div>
+
+          <span class="text-blue-600 font-medium">
+            Applied
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 text-center py-6 mt-10">
+
+    <p>
+      © 2026 JobBoard. All rights reserved.
+    </p>
+
+  </footer>
+
+</body>
+</html>
