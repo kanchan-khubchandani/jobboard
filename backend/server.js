@@ -39,6 +39,7 @@ app.use("/api/jobs", jobRoutes);
 // User Authentication Routes
 app.use("/api/users", userRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/users", require("./routes/userRoutes"));
 
 // Test route
 app.get("/", (req, res) => {

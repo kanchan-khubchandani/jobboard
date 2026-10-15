@@ -1,22 +1,33 @@
+
 const express = require("express");
 
 const {
     register,
     login,
-    getProfile
+    getProfile,
+    getAdminDashboard
 } = require("../controllers/userController");
 
-const protect = require("../middleware/authMiddleware");
+const {
+    protect,
+    adminOnly
+} = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Register
+// Public routes
 router.post("/register", register);
-
-// Login
 router.post("/login", login);
 
-// Protected Profile
+// Authenticated user route
 router.get("/profile", protect, getProfile);
+
+// Admin-only route
+router.get(
+    "/admin",
+    protect,
+    adminOnly,
+    getAdminDashboard
+);
 
 module.exports = router;
