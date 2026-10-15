@@ -18,7 +18,12 @@ function App() {
 
   const [search, setSearch] = useState("");
 
-  const { user, login, register } = useAuth();
+  const {
+    user,
+    login,
+    register,
+    loading: authLoading
+  } = useAuth();
 
   const [selectedJob, setSelectedJob] = useState(null);
 
@@ -52,14 +57,18 @@ function App() {
 
   // LOGIN
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
 
     e.preventDefault();
 
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    const result = login(email, password);
+
+    const result = await login(
+      email,
+      password
+    );
 
 
     if (!result.success) {
@@ -75,6 +84,9 @@ function App() {
     setError("");
     setSuccess("");
 
+
+    // Go to dashboard after successful login
+
     setPage("dashboard");
 
   }
@@ -82,7 +94,7 @@ function App() {
 
   // CREATE ACCOUNT
 
-  function handleRegister(e) {
+  async function handleRegister(e) {
 
     e.preventDefault();
 
@@ -91,6 +103,8 @@ function App() {
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
 
+
+    // Check password confirmation
 
     if (password !== confirmPassword) {
 
@@ -102,7 +116,7 @@ function App() {
     }
 
 
-    const result = register(
+    const result = await register(
       name,
       email,
       password
@@ -124,6 +138,9 @@ function App() {
     setSuccess(
       "Account created successfully! You can now login."
     );
+
+
+    // Switch to Login
 
     setLoginMode(true);
 
@@ -189,6 +206,33 @@ function App() {
   );
 
 
+  // AUTHENTICATION LOADING
+
+  if (authLoading) {
+
+    return (
+
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+
+        <div className="text-center">
+
+          <h2 className="text-2xl font-bold text-blue-600">
+            JobBoard
+          </h2>
+
+          <p className="text-gray-500 mt-2">
+            Loading your account...
+          </p>
+
+        </div>
+
+      </div>
+
+    );
+
+  }
+
+
   return (
 
     <div className="min-h-screen bg-gray-50">
@@ -246,15 +290,17 @@ function App() {
 
                 {filteredJobs.length > 0 ? (
 
-                  filteredJobs.slice(0, 3).map((job) => (
+                  filteredJobs
+                    .slice(0, 3)
+                    .map((job) => (
 
-                    <JobCard
-                      key={job.id}
-                      job={job}
-                      onApply={setSelectedJob}
-                    />
+                      <JobCard
+                        key={job.id}
+                        job={job}
+                        onApply={setSelectedJob}
+                      />
 
-                  ))
+                    ))
 
                 ) : (
 
@@ -351,6 +397,8 @@ function App() {
 
           <div className="bg-white w-full max-w-md p-8 rounded-xl shadow-lg">
 
+
+            {/* ================= LOGIN ================= */}
 
             {loginMode ? (
 
@@ -457,6 +505,9 @@ function App() {
 
             ) : (
 
+
+              /* ================= CREATE ACCOUNT ================= */
+
               <>
 
                 <h2 className="text-3xl font-bold text-center text-gray-800">
@@ -467,6 +518,15 @@ function App() {
                 <p className="text-gray-500 text-center mt-2">
                   Create your JobBoard account
                 </p>
+
+
+                {success && (
+
+                  <p className="bg-green-100 text-green-600 text-sm p-3 rounded-lg mt-5 text-center">
+                    {success}
+                  </p>
+
+                )}
 
 
                 {error && (
@@ -574,6 +634,121 @@ function App() {
       )}
 
 
+      {/* ================= PROFILE ================= */}
+
+      {page === "profile" && user && (
+
+        <section className="max-w-4xl mx-auto px-6 py-12">
+
+          <h2 className="text-3xl font-bold text-gray-800">
+            My Profile
+          </h2>
+
+
+          <p className="text-gray-500 mt-2">
+            Your authenticated JobBoard profile
+          </p>
+
+
+          <div className="bg-white rounded-xl shadow mt-8 p-8">
+
+
+            {/* NAME */}
+
+            <div className="mb-6">
+
+              <p className="text-sm text-gray-500">
+                Name
+              </p>
+
+              <p className="text-xl font-semibold text-gray-800 mt-1">
+                {user.name}
+              </p>
+
+            </div>
+
+
+            {/* EMAIL */}
+
+            <div className="mb-6">
+
+              <p className="text-sm text-gray-500">
+                Email
+              </p>
+
+              <p className="text-xl font-semibold text-gray-800 mt-1">
+                {user.email}
+              </p>
+
+            </div>
+
+
+            {/* AUTHENTICATION STATUS */}
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-5">
+
+              <p className="text-green-700 font-semibold">
+                ✓ Authenticated User
+              </p>
+
+              <p className="text-sm text-green-600 mt-1">
+                Your profile is protected using JWT authentication.
+              </p>
+
+            </div>
+
+
+            {/* SECURITY INFORMATION */}
+
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+
+              <div className="border rounded-lg p-4">
+
+                <p className="text-sm text-gray-500">
+                  Authentication
+                </p>
+
+                <p className="font-semibold text-blue-600 mt-1">
+                  JWT
+                </p>
+
+              </div>
+
+
+              <div className="border rounded-lg p-4">
+
+                <p className="text-sm text-gray-500">
+                  Password
+                </p>
+
+                <p className="font-semibold text-blue-600 mt-1">
+                  Hashed
+                </p>
+
+              </div>
+
+
+              <div className="border rounded-lg p-4">
+
+                <p className="text-sm text-gray-500">
+                  Access
+                </p>
+
+                <p className="font-semibold text-green-600 mt-1">
+                  Protected
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      )}
+
+
       {/* ================= DASHBOARD ================= */}
 
       {page === "dashboard" && (
@@ -620,12 +795,14 @@ function App() {
               </p>
 
               <h3 className="text-3xl font-bold text-green-600 mt-2">
+
                 {
                   userApplications.filter(
                     (application) =>
                       application.status === "Interview"
                   ).length
                 }
+
               </h3>
 
             </div>
@@ -655,12 +832,14 @@ function App() {
               </p>
 
               <h3 className="text-3xl font-bold text-orange-500 mt-2">
+
                 {
                   userApplications.filter(
                     (application) =>
                       application.status === "Offer"
                   ).length
                 }
+
               </h3>
 
             </div>
@@ -709,7 +888,6 @@ function App() {
                       className="border border-gray-200 rounded-lg p-4 flex items-center justify-between"
                     >
 
-
                       {/* JOB DETAILS */}
 
                       <div>
@@ -740,7 +918,6 @@ function App() {
                         {application.status}
                       </span>
 
-
                     </div>
 
                   ))}
@@ -769,6 +946,7 @@ function App() {
     </div>
 
   );
+
 }
 
 

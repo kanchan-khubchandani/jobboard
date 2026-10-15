@@ -53,23 +53,34 @@ function Navbar({ setPage }) {
 
         {user ? (
 
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 text-white px-5 py-2 rounded-lg hover:bg-red-600"
-          >
-            Logout
-          </button>
+  <>
 
-        ) : (
+    <button
+      onClick={() => setPage("profile")}
+      className="text-gray-600 hover:text-blue-600"
+    >
+      Profile
+    </button>
 
-          <button
-            onClick={() => setPage("login")}
-            className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700"
-          >
-            Login
-          </button>
+    <button
+      onClick={handleLogout}
+      className="bg-red-500 text-white px-5 py-2 rounded-lg hover:bg-red-600"
+    >
+      Logout
+    </button>
 
-        )}
+  </>
+
+) : (
+
+  <button
+    onClick={() => setPage("login")}
+    className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700"
+  >
+    Login
+  </button>
+
+)}
 
       </div>
 
