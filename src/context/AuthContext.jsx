@@ -7,7 +7,7 @@ import {
 
 const AuthContext = createContext();
 
-const API_URL = "http://localhost:5000/api/users";
+const API_URL = "http://localhost:5001/api/users";
 
 export function AuthProvider({ children }) {
 

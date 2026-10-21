@@ -9,6 +9,8 @@ import useFetch from "./hooks/useFetch";
 
 import { useAuth } from "./context/AuthContext";
 
+import Chat from "./Chat";
+
 
 function App() {
 
@@ -238,6 +240,8 @@ function App() {
     <div className="min-h-screen bg-gray-50">
 
       <Navbar setPage={setPage} />
+
+      {page === "chat" && <Chat />}
 
 
       {/* ================= HOME ================= */}
