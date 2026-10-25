@@ -9,11 +9,17 @@ export default function Chat() {
   const [connected, setConnected] = useState(false);
   const socketRef = useRef(null);
 
-  const socket = io("https://jobboard-by9e.onrender.com");
+  useEffect(() => {
+    const socket = io("https://jobboard-by9e.onrender.com");
     socketRef.current = socket;
 
     socket.on("connect", () => setConnected(true));
     socket.on("disconnect", () => setConnected(false));
+
+    socket.on("connect_error", (error) => {
+      console.error("Socket connection error:", error.message);
+      setConnected(false);
+    });
 
     socket.on("chatMessage", (data) => {
       setMessages((previous) => [...previous, data]);
@@ -32,7 +38,7 @@ export default function Chat() {
 
     socketRef.current?.emit("chatMessage", {
       username: username.trim(),
-      message: message.trim()
+      message: message.trim(),
     });
 
     setMessage("");
@@ -45,9 +51,11 @@ export default function Chat() {
           JobBoard Real-Time Chat
         </h2>
 
-        <p className={`mt-3 font-medium ${
-          connected ? "text-green-600" : "text-red-600"
-        }`}>
+        <p
+          className={`mt-3 font-medium ${
+            connected ? "text-green-600" : "text-red-600"
+          }`}
+        >
           {connected ? "Connected" : "Connecting..."}
         </p>
 
