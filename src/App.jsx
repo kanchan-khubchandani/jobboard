@@ -201,11 +201,9 @@ function App() {
 
   // USER APPLICATIONS
 
-  const userApplications = applications.filter(
-    (application) =>
-      user &&
-      application.email === user.email
-  );
+ const userApplications = applications.filter(
+  (application) => user
+);
 
 
   // AUTHENTICATION LOADING
