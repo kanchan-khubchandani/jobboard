@@ -3,11 +3,11 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+COPY backend/package*.json ./
+RUN npm install --omit=dev
 
-COPY . .
+COPY backend/ ./
 
-EXPOSE 5173
+ENV NODE_ENV=production
 
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+CMD ["npm", "start"]
