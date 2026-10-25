@@ -9,10 +9,7 @@ export default function Chat() {
   const [connected, setConnected] = useState(false);
   const socketRef = useRef(null);
 
-  useEffect(() => {
-    const socket = io(
-  import.meta.env.VITE_API_URL || "http://localhost:5000"
-);
+  const socket = io("https://jobboard-by9e.onrender.com");
     socketRef.current = socket;
 
     socket.on("connect", () => setConnected(true));
