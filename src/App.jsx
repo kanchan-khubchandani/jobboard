@@ -324,10 +324,11 @@ function App() {
             <section className="max-w-6xl mx-auto px-6 pb-12">
 
               <ApplyForm
-                job={selectedJob}
-                onClose={() => setSelectedJob(null)}
-                onSubmit={handleApplicationSubmit}
-              />
+  job={selectedJob}
+  user={user}
+  onClose={() => setSelectedJob(null)}
+  onSubmit={handleApplicationSubmit}
+/>
 
             </section>
 
@@ -365,10 +366,11 @@ function App() {
           ) : selectedJob ? (
 
             <ApplyForm
-              job={selectedJob}
-              onClose={() => setSelectedJob(null)}
-              onSubmit={handleApplicationSubmit}
-            />
+  job={selectedJob}
+  user={user}
+  onClose={() => setSelectedJob(null)}
+  onSubmit={handleApplicationSubmit}
+/>
 
           ) : (
 
