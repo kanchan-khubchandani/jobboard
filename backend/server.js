@@ -51,16 +51,19 @@ const server = http.createServer(app);
 
 // Configure Socket.IO
 // Configure Socket.IO
+
+
 const allowedOrigins = [
-    "http://localhost:5173",
-    process.env.FRONTEND_URL
+  "http://localhost:5173",
+  "https://jobboard-2oxehl4un-kanchan-team1.vercel.app",
+  process.env.FRONTEND_URL
 ].filter(Boolean);
 
 const io = new Server(server, {
-    cors: {
-        origin: allowedOrigins,
-        methods: ["GET", "POST"]
-    }
+  cors: {
+    origin: allowedOrigins,
+    methods: ["GET", "POST"]
+  }
 });
 
 // Handle real-time chat
