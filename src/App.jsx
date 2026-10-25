@@ -197,7 +197,8 @@ function App() {
     setSelectedJob(null);
 
   }
-
+ console.log("Logged-in user:", user);
+console.log("All saved applications:", applications);
 
   // USER APPLICATIONS
 
