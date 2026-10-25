@@ -201,9 +201,21 @@ function App() {
 
   // USER APPLICATIONS
 
- const userApplications = applications.filter(
-  (application) => user
-);
+const userApplications = applications.filter((application) => {
+  const applicationEmail = application.email
+    ?.trim()
+    .toLowerCase();
+
+  const loggedInEmail = user?.email
+    ?.trim()
+    .toLowerCase();
+
+  return (
+    loggedInEmail &&
+    applicationEmail &&
+    applicationEmail === loggedInEmail
+  );
+});
 
 
   // AUTHENTICATION LOADING
