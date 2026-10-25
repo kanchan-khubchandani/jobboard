@@ -197,6 +197,7 @@ function App() {
     setSelectedJob(null);
 
   }
+  console.log("Console is working");
  console.log("Logged-in user:", user);
 console.log("All saved applications:", applications);
 
