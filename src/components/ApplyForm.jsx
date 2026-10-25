@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 function ApplyForm({ job, onClose, onSubmit, user }) {
@@ -9,6 +8,11 @@ function ApplyForm({ job, onClose, onSubmit, user }) {
 
     const form = e.target;
 
+    const name = form.elements.name.value.trim();
+    const email = form.elements.email.value.trim();
+    const phone = form.elements.phone.value.trim();
+    const message = form.elements.message.value.trim();
+
     const application = {
       id: Date.now(),
       jobId: job.id,
@@ -16,12 +20,12 @@ function ApplyForm({ job, onClose, onSubmit, user }) {
       company: job.company,
       location: job.location,
       type: job.type,
-      name: form.name.value.trim(),
-      email: user?.email || form.email.value.trim(),
-      phone: form.phone.value.trim(),
-      message: form.message.value.trim(),
+      name: user?.name || name,
+      email: (user?.email || email).trim().toLowerCase(),
+      phone,
+      message,
       status: "Applied",
-      appliedAt: new Date().toLocaleString(),
+      appliedAt: new Date().toLocaleString()
     };
 
     onSubmit(application);
