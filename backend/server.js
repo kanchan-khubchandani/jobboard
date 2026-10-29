@@ -53,24 +53,66 @@ const server = http.createServer(app);
 // Configure Socket.IO
 
 
-const allowedOrigins = [
-  "https://jobboard-8kk4luu86-kanchan-team1.vercel.app",
-  "https://jobboard-2oxehl4un-kanchan-team1.vercel.app",
-  "http://localhost:5173"
-];
+// const allowedOrigins = [
+//   "https://jobboard-8kk4luu86-kanchan-team1.vercel.app",
+//   "https://jobboard-2oxehl4un-kanchan-team1.vercel.app",
+//   "http://localhost:5173"
+// ];
+
+// app.use(cors({
+//   origin: allowedOrigins,
+//   credentials: true
+// }));
 
 app.use(cors({
-  origin: allowedOrigins,
-  credentials: true
+  origin: allowedOrigin,
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
 }));
+
+// const io = new Server(server, {
+//   cors: {
+//     origin: [
+//       "https://jobboard-8kk4luu86-kanchan-team1.vercel.app",
+//       "https://jobboard-2oxehl4un-kanchan-team1.vercel.app",
+//       "http://localhost:5173"
+//     ],
+//     methods: ["GET", "POST"],
+//     credentials: true
+//   }
+// });
+
+const allowedOrigin = (origin, callback) => {
+  if (!origin) {
+    return callback(null, true);
+  }
+
+  try {
+    const url = new URL(origin);
+    const host = url.hostname;
+
+    const allowed =
+      host === "localhost" ||
+      host === "127.0.0.1" ||
+      host === "jobboard.vercel.app" ||
+      (
+        host.startsWith("jobboard-") &&
+        host.endsWith("-kanchan-team1.vercel.app")
+      );
+
+    if (allowed) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("Origin not allowed"));
+  } catch {
+    return callback(new Error("Invalid origin"));
+  }
+};
 
 const io = new Server(server, {
   cors: {
-    origin: [
-      "https://jobboard-8kk4luu86-kanchan-team1.vercel.app",
-      "https://jobboard-2oxehl4un-kanchan-team1.vercel.app",
-      "http://localhost:5173"
-    ],
+    origin: allowedOrigin,
     methods: ["GET", "POST"],
     credentials: true
   }
