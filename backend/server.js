@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
 });
 
 // Create HTTP server
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
 const server = http.createServer(app);
 
 // Configure Socket.IO
@@ -64,23 +64,6 @@ const server = http.createServer(app);
 //   credentials: true
 // }));
 
-app.use(cors({
-  origin: allowedOrigin,
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
-}));
-
-// const io = new Server(server, {
-//   cors: {
-//     origin: [
-//       "https://jobboard-8kk4luu86-kanchan-team1.vercel.app",
-//       "https://jobboard-2oxehl4un-kanchan-team1.vercel.app",
-//       "http://localhost:5173"
-//     ],
-//     methods: ["GET", "POST"],
-//     credentials: true
-//   }
-// });
 
 const allowedOrigin = (origin, callback) => {
   if (!origin) {
@@ -110,12 +93,66 @@ const allowedOrigin = (origin, callback) => {
   }
 };
 
+
+app.use(cors({
+  origin: allowedOrigin,
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
+}));
+
+app.use(express.json());
+
+// const io = new Server(server, {
+//   cors: {
+//     origin: [
+//       "https://jobboard-8kk4luu86-kanchan-team1.vercel.app",
+//       "https://jobboard-2oxehl4un-kanchan-team1.vercel.app",
+//       "http://localhost:5173"
+//     ],
+//     methods: ["GET", "POST"],
+//     credentials: true
+//   }
+// });
+
+// const allowedOrigin = (origin, callback) => {
+//   if (!origin) {
+//     return callback(null, true);
+//   }
+
+//   try {
+//     const url = new URL(origin);
+//     const host = url.hostname;
+
+//     const allowed =
+//       host === "localhost" ||
+//       host === "127.0.0.1" ||
+//       host === "jobboard.vercel.app" ||
+//       (
+//         host.startsWith("jobboard-") &&
+//         host.endsWith("-kanchan-team1.vercel.app")
+//       );
+
+//     if (allowed) {
+//       return callback(null, true);
+//     }
+
+//     return callback(new Error("Origin not allowed"));
+//   } catch {
+//     return callback(new Error("Invalid origin"));
+//   }
+// };
+
 const io = new Server(server, {
   cors: {
     origin: allowedOrigin,
     methods: ["GET", "POST"],
     credentials: true
   }
+});
+
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 // Handle real-time chat
