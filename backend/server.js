@@ -54,10 +54,15 @@ const server = http.createServer(app);
 
 
 const allowedOrigins = [
-  "http://localhost:5173",
+  "https://jobboard-8kk4luu86-kanchan-team1.vercel.app",
   "https://jobboard-2oxehl4un-kanchan-team1.vercel.app",
-  process.env.FRONTEND_URL
-].filter(Boolean);
+  "http://localhost:5173"
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 
 const io = new Server(server, {
   cors: {
